@@ -17,7 +17,7 @@ class MinimaxAgent(Agent):
         if maximizing_player:
             max_eval = -np.inf
             best_action = None
-            for action in range(board.length):
+            for action in board.get_posible_actions():
                 board_copy = board.clone()
                 if board_copy.add_tile(action, self.player):
                     eval, _ = self.minimax(board_copy, depth - 1, False)
@@ -28,7 +28,7 @@ class MinimaxAgent(Agent):
         else:
             min_eval = np.inf
             best_action = None
-            for action in range(board.length):
+            for action in board.get_posible_actions():
                 board_copy = board.clone()
                 if board_copy.add_tile(action, self.opponent):
                     eval, _ = self.minimax(board_copy, depth - 1, True)
@@ -56,16 +56,16 @@ class MinimaxAgent(Agent):
                 window = board[row:row+4, col]
                 score += self.evaluate_window(window, player)
 
-        # Evaluar diagonales descendentes
+        # Evaluar diagonales ascendentes
         for row in range(board.heigth - 3):
             for col in range(board.length - 3):
                 window = [board[row+i, col+i] for i in range(4)]
                 score += self.evaluate_window(window, player)
 
-        # Evaluar diagonales ascendentes
-        for row in range(board.heigth - 3):
+        # Evaluar diagonales descendentes
+        for row in range(3, board.heigth):
             for col in range(board.length - 3):
-                window = [board[row+3-i, col+i] for i in range(4)]
+                window = [board[row-i, col+i] for i in range(4)]
                 score += self.evaluate_window(window, player)
 
         return score
