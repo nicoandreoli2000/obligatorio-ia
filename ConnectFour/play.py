@@ -6,12 +6,10 @@ def play_vs_other_agent(env, agent1, agent2):
     winner = 0
     while not done:
         env.render()
-        print(str(env._grid))
         action = agent1.next_action(obs)
         obs, _, done, _ = env.step(action)
 
         env.render()
-        print(str(env._grid))
         if not done:
             next_action = agent2.next_action(obs)
             _, _, done, _ = env.step(next_action)
