@@ -18,10 +18,11 @@ def play_vs_other_agent(env, agent1, agent2):
     winner = env._grid.winner
     final_msg = "Player " + str(winner) + " WON!!!" if winner != 0 else "It's a tie!" 
     print(final_msg)
+    return final_msg
 
 def play_vs_loaded_agent(env, agent):
     enemy_agent = load_enemy_agent()
-    play_vs_other_agent(env, agent, enemy_agent)
+    return play_vs_other_agent(env, agent, enemy_agent)
 
 def load_enemy_agent():
     return SpaceGPTAgent(2, 4)
