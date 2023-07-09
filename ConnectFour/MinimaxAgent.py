@@ -84,4 +84,3 @@ class MinimaxAgent(Agent):
             score += 10
 
         return score
-
